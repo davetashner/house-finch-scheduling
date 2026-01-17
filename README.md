@@ -32,7 +32,7 @@ Planning is the most important part of this process.  Implementation is easy if:
 - Humans go back-and-forth with agents on design decisions and document those decisions with decision records
 
 ### Backlog Visualization
-While the backlog should only be updated by asking agents to update beads/backlog.jsonl, it can be visualized here: https://github.com/davetashner/house-finch-scheduling.  New changes to the `main` branch of this repository will automatically be displayed in the backlog visualization layer.
+While the backlog should only be updated by asking agents to update beads/backlog.jsonl, it can be visualized here: https://davetashner.github.io/house-finch-scheduling.  New changes to the `main` branch of this repository will automatically be displayed in the backlog visualization layer.
 
 ---
 
