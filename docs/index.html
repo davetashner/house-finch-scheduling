@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>House Finch Project Backlog</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --open: #ca8a04;
+      --open-bg: #fef9c3;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-900);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    h1 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--gray-500);
+      font-size: 1rem;
+    }
+
+    .info-box {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .info-box h2 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 0.5rem;
+    }
+
+    .info-box p {
+      font-size: 0.875rem;
+      color: var(--gray-500);
+    }
+
+    .summary {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .summary-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .summary-card .number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .summary-card .label {
+      font-size: 0.75rem;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .epic-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .epic-header {
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      transition: background 0.15s;
+    }
+
+    .epic-header:hover {
+      background: var(--gray-50);
+    }
+
+    .toggle-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      color: var(--gray-500);
+      transition: transform 0.2s;
+    }
+
+    .epic-card.collapsed .toggle-icon {
+      transform: rotate(-90deg);
+    }
+
+    .epic-content {
+      flex: 1;
+    }
+
+    .epic-title-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .epic-id {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      background: var(--gray-100);
+      padding: 0.125rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .epic-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .epic-intent {
+      font-size: 0.875rem;
+      color: var(--gray-500);
+      margin-top: 0.25rem;
+    }
+
+    .epic-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .issue-count {
+      font-size: 0.75rem;
+      color: var(--gray-500);
+      white-space: nowrap;
+    }
+
+    .issue-count .done {
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .status-badge {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.25rem 0.625rem;
+      border-radius: 9999px;
+      text-transform: capitalize;
+    }
+
+    .status-badge.open {
+      background: var(--open-bg);
+      color: var(--open);
+    }
+
+    .status-badge.done {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .issues-list {
+      border-top: 1px solid var(--gray-200);
+      padding: 0;
+    }
+
+    .epic-card.collapsed .issues-list {
+      display: none;
+    }
+
+    .issue-item {
+      padding: 0.875rem 1.25rem 0.875rem 3rem;
+      border-bottom: 1px solid var(--gray-100);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .issue-item:last-child {
+      border-bottom: none;
+    }
+
+    .issue-content {
+      flex: 1;
+    }
+
+    .issue-title-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .issue-id {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      color: var(--gray-500);
+    }
+
+    .issue-title {
+      font-size: 0.875rem;
+      color: var(--gray-700);
+    }
+
+    .issue-description {
+      font-size: 0.8125rem;
+      color: var(--gray-500);
+      margin-top: 0.25rem;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--gray-500);
+    }
+
+    .error {
+      text-align: center;
+      padding: 2rem;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      color: #dc2626;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .summary-card {
+        min-width: 100px;
+        padding: 0.75rem 1rem;
+      }
+
+      .summary-card .number {
+        font-size: 1.5rem;
+      }
+
+      .epic-header {
+        padding: 0.875rem 1rem;
+      }
+
+      .epic-meta {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.375rem;
+      }
+
+      .issue-item {
+        padding-left: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🏠 The House Finch Project Backlog</h1>
+      <p class="subtitle">Customer scheduling &amp; subscription management system</p>
+    </header>
+
+    <div class="info-box">
+      <h2>About This Backlog</h2>
+      <p>This is a read-only view of the project backlog. All changes are made through AI agents following the Beads methodology. The source of truth is <code>backlog.jsonl</code> — this visualization updates automatically when that file changes.</p>
+    </div>
+
+    <div class="summary" id="summary">
+      <div class="summary-card">
+        <div class="number" id="epic-count">-</div>
+        <div class="label">Epics</div>
+      </div>
+      <div class="summary-card">
+        <div class="number" id="issue-count">-</div>
+        <div class="label">Issues</div>
+      </div>
+      <div class="summary-card">
+        <div class="number" id="done-count">-</div>
+        <div class="label">Done</div>
+      </div>
+    </div>
+
+    <div id="backlog">
+      <div class="loading">Loading backlog...</div>
+    </div>
+  </div>
+
+  <script>
+    async function loadBacklog() {
+      try {
+        const response = await fetch('backlog.jsonl');
+        if (!response.ok) throw new Error('Failed to load backlog');
+        
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        
+        const items = [];
+        for (const line of lines) {
+          try {
+            items.push(JSON.parse(line));
+          } catch (e) {
+            console.warn('Failed to parse line:', line);
+          }
+        }
+        
+        const epicMap = new Map();
+        const epics = [];
+        
+        for (const item of items) {
+          if (item.type === 'epic') {
+            if (!epicMap.has(item.id)) {
+              const epic = { ...item, issues: [] };
+              epicMap.set(item.id, epic);
+              epics.push(epic);
+            }
+          }
+        }
+        
+        for (const item of items) {
+          if (item.type === 'issue' && item.epic) {
+            const epic = epicMap.get(item.epic);
+            if (epic) {
+              const existingIndex = epic.issues.findIndex(i => i.id === item.id);
+              if (existingIndex >= 0) {
+                epic.issues[existingIndex] = item;
+              } else {
+                epic.issues.push(item);
+              }
+            }
+          }
+        }
+        
+        let totalIssues = 0;
+        let doneIssues = 0;
+        for (const epic of epics) {
+          totalIssues += epic.issues.length;
+          doneIssues += epic.issues.filter(i => i.status === 'done').length;
+        }
+        
+        document.getElementById('epic-count').textContent = epics.length;
+        document.getElementById('issue-count').textContent = totalIssues;
+        document.getElementById('done-count').textContent = doneIssues;
+        
+        renderBacklog(epics);
+      } catch (error) {
+        document.getElementById('backlog').innerHTML = `
+          <div class="error">
+            <strong>Error loading backlog</strong><br>
+            ${error.message}
+          </div>
+        `;
+      }
+    }
+
+    function renderBacklog(epics) {
+      const container = document.getElementById('backlog');
+      container.innerHTML = '';
+      
+      for (const epic of epics) {
+        const doneCount = epic.issues.filter(i => i.status === 'done').length;
+        const totalCount = epic.issues.length;
+        
+        const card = document.createElement('div');
+        card.className = 'epic-card';
+        
+        card.innerHTML = `
+          <div class="epic-header" onclick="toggleEpic(this)">
+            <svg class="toggle-icon" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+            <div class="epic-content">
+              <div class="epic-title-row">
+                <span class="epic-id">${epic.id}</span>
+                <span class="epic-title">${escapeHtml(epic.title)}</span>
+              </div>
+              ${epic.intent ? `<div class="epic-intent">${escapeHtml(epic.intent)}</div>` : ''}
+            </div>
+            <div class="epic-meta">
+              <span class="issue-count">
+                <span class="done">${doneCount}</span> / ${totalCount} done
+              </span>
+              <span class="status-badge ${epic.status}">${epic.status}</span>
+            </div>
+          </div>
+          <div class="issues-list">
+            ${epic.issues.map(issue => `
+              <div class="issue-item">
+                <div class="issue-content">
+                  <div class="issue-title-row">
+                    <span class="issue-id">${issue.id}</span>
+                    <span class="issue-title">${escapeHtml(issue.title)}</span>
+                    <span class="status-badge ${issue.status}">${issue.status}</span>
+                  </div>
+                  ${issue.description ? `<div class="issue-description">${escapeHtml(issue.description)}</div>` : ''}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        
+        container.appendChild(card);
+      }
+    }
+
+    function toggleEpic(header) {
+      const card = header.closest('.epic-card');
+      card.classList.toggle('collapsed');
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    loadBacklog();
+  </script>
+</body>
+</html>
