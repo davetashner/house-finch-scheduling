@@ -35,6 +35,7 @@ https://github.com/steveyegge/beads
 ├── beads/
 │   └── backlog.jsonl   # Beads-style backlog (source of truth)
 └── README.md           # This file
+```
 
 ---
 
@@ -93,3 +94,4 @@ Requirements:
 - Append the epic as a new JSONL line
 - Do not modify existing lines
 - Output only the new JSONL line
+```
