@@ -17,7 +17,7 @@ And to allow staff to:
 
 ## Project Philosophy
 
-This project follows **Steve Yegge’s Beads methodology**:
+This project follows **Steve Yegge’s Beads methodology for backlog management**:
 
 - Problems are identified *before* solutions
 - Work is broken into small, incremental, testable beads
@@ -25,6 +25,14 @@ This project follows **Steve Yegge’s Beads methodology**:
 
 Reference:  
 https://github.com/steveyegge/beads
+
+Planning is the most important part of this process.  Implementation is easy if:
+- Constraints are well-defined
+- Tests are required
+- Humans go back-and-forth with agents on design decisions and document those decisions with decision records
+
+### Backlog Visualization
+While the backlog should only be updated by asking agents to update beads/backlog.jsonl, it can be visualized here: https://github.com/davetashner/house-finch-scheduling.  New changes to the `main` branch of this repository will automatically be displayed in the backlog visualization layer.
 
 ---
 
