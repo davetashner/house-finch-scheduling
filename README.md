@@ -38,6 +38,20 @@ https://github.com/steveyegge/beads
 
 ---
 
+## Agent Guardrails
+
+For authoritative rules on working with this backlog, see [`AGENTS.md`](AGENTS.md).
+
+Detailed documentation lives in [`.beads/`](.beads/):
+- [Operating rules](.beads/operating-rules.md)
+- [Backlog format](.beads/backlog-format.md)
+- [Project context](.beads/context.md)
+- [Workflow](.beads/workflow.md)
+- [Validation](.beads/validation.md)
+- [Prompt templates](.beads/prompts/backlog-change-template.md)
+
+---
+
 ## Updating the Backlog (Agent-Driven Only)
 
 The file `beads/backlog.jsonl` is the **system of record** for this project’s backlog.  
